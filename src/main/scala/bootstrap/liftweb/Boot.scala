@@ -8,7 +8,9 @@ import common._
 import http._
 import sitemap._
 import Loc._
-
+import net.liftmodules.amqp.AMQPAddListener
+import code.comet.ChatServer
+import code.comet.Rabbit.RemoteReceiver
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -42,6 +44,8 @@ class Boot {
 
     // Force the request to be UTF-8
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
+
+    RemoteReceiver ! AMQPAddListener(ChatServer)
 
   }
 }
