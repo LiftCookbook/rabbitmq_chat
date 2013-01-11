@@ -6,6 +6,7 @@ import http._
 import actor._
 import net.liftmodules.amqp.AMQPMessage
 import comet.Rabbit.RemoteSend
+import util.Props
 
 /**
  * A singleton that provides chat features to all clients.
@@ -31,6 +32,8 @@ object ChatServer extends LiftActor with ListenerManager {
    */
   override def lowPriority = {
     case AMQPMessage(s: String) => msgs :+= s; updateListeners()
-    case s: String => RemoteSend ! AMQPMessage(s)
+    case s: String =>
+      if (Props.productionMode) RemoteSend ! AMQPMessage(s)
+      else { msgs :+= s; updateListeners() }
   }
 }

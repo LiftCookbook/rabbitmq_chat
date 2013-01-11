@@ -45,7 +45,8 @@ class Boot {
     // Force the request to be UTF-8
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
 
-    RemoteReceiver ! AMQPAddListener(ChatServer)
+    if (Props.productionMode)
+      RemoteReceiver ! AMQPAddListener(ChatServer)
 
   }
 }
