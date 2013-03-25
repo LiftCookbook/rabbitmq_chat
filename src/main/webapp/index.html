@@ -2,10 +2,10 @@
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head><title>Home</title></head>
-  <body class="lift:content_id=main">
-    <div id="main" class="lift:surround?with=default;at=content">
+  <body data-lift-content-id="main">
+    <div id="main" data-lift="surround?with=default;at=content">
       <!-- the behavior of the div -->
-      <div class="lift:comet?type=Chat"> 
+      <div data-lift="comet?type=Chat"> 
         Some chat messages
         <ul>
           <li>A message</li>
@@ -15,8 +15,8 @@
       </div>
       
       <div>
-        <form class="lift:form.ajax">
-          <input class="lift:ChatIn" id="chat_in"/>
+        <form data-lift="form.ajax">
+          <input data-lift="ChatIn" id="chat_in"/>
           <input type="submit" value="Say Something"/>
         </form>
       </div>
