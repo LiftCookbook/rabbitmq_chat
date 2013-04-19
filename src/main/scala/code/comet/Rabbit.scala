@@ -14,17 +14,23 @@ object Rabbit {
   val exchange = "lift.chat"
   val routing = ""
   val durable = true
+  val autoAck = false
 
   object RemoteSend extends AMQPSender[String](factory, exchange, routing) {
-    def configure(channel: Channel) = channel.exchangeDeclare(exchange, "fanout", durable)
+    def configure(channel: Channel) =
+      channel.exchangeDeclare(exchange, "fanout", durable)
   }
 
   object RemoteReceiver extends AMQPDispatcher[String](factory) {
     def configure(channel: Channel) = {
+
       channel.exchangeDeclare(exchange, "fanout", durable)
       val queueName = channel.queueDeclare().getQueue()
+
       channel.queueBind(queueName, exchange, routing)
-      channel.basicConsume(queueName, false, new SerializedConsumer(channel, this))
+
+      channel.basicConsume(queueName, autoAck,
+        new SerializedConsumer(channel, this) )
     }
   }
 
