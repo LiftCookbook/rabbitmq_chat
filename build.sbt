@@ -16,7 +16,7 @@ net.virtualvoid.sbt.graph.Plugin.graphSettings
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
 libraryDependencies ++= {
-  val liftVersion = "2.5-RC5"
+  val liftVersion = "2.5"
   Seq(
     "net.liftweb"       %% "lift-webkit"        % liftVersion        % "compile",
     "net.liftmodules"   %% "lift-jquery-module_2.5" % "2.3",
